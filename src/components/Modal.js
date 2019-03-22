@@ -7,16 +7,19 @@ class Modal extends Component {
     state={
         showSignUp:false,
     }
- 
 
+    showSignUp=()=>{
+        this.setState({showSignUp:!this.state.showSignUp})
+    }
+ 
     render() {
         
         const {showSignUp}= this.state;
-        const {show, showModal,closeModal}=this.props;
+        const {show, showModal,toggle,toggleSignupAlert}=this.props;
         
         return (
         <div>
-            {showSignUp?<SignUp/>:<Login show={show} showModal={showModal} closeModal={closeModal}/>}
+            {showSignUp?<SignUp show={show} showModal={showModal} toggle={toggle}/>:<Login show={show} showModal={showModal} toggle={toggle} showSignUp={this.showSignUp}/>}
         </div>
         )
     }
