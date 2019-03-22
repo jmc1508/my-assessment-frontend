@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import {Grid,
-      Segment,
-      Image} from 'semantic-ui-react'
+
+import JumbotronFluid from '../components/JumobtronFluid'
 
 class HomePage extends Component {
 
@@ -11,7 +10,8 @@ class HomePage extends Component {
 
     return (
       <div>
-        <h1>HomePage</h1>
+        {/* Component - Jumbotron */}
+        <JumbotronFluid/>
         
         
       </div>

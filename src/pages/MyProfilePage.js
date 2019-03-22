@@ -1,42 +1,61 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+import EditProfile from '../containers/EditProfile'
+
 class MyProfilePage extends Component {
 
-  // Make API request
-  componentDidMount = () => {
+    state={
+      hasErrors:false,
+      errors:[],
+      email:'',
+      username:'',
+    }
+    // Make API request
+    componentDidMount = () => {
 
-    const jwt= localStorage.getItem('jwt')
+      const jwt= localStorage.getItem('jwt')
 
-    axios({
-        
-      method: 'GET',
-      url: 'http://127.0.0.1:5000/api/v1/users/me',
+      axios({
+          
+        method: 'GET',
+        url: 'http://127.0.0.1:5000/api/v1/users/me',
 
-      headers :{
-          Authorization: `Bearer ${jwt}`
-      }
-    })
-    .then(response => {
-        console.log(response)
+        headers :{
+            Authorization: `Bearer ${jwt}`
+        }
+      })
+      .then(response => {
+          console.log(response)
 
-    })
+          this.setState({email:response.data.email,
+                        username:response.data.username})
 
-    .catch(error=>{
-        console.log('ERROR: ', error)
       })
 
-  }
-  
+      .catch(error=>{
+          console.log('ERROR: ', error)
+          this.setState({errors:error.response.data.error,
+                        hasErrors:!this.state.hasErrors})
+        })
 
+    }
+    
+    render() {
+      const jwt=localStorage.getItem('jwt')
+      const {email,username}=this.state
+      return (
+        <div>
+        {/* If logged in, allow user to fill up profile page */}
+            {jwt?
+            <EditProfile email={email} username={username}/>
+            :
+            <h1>You are not authorised to view this page</h1>}
 
-  render() {
-    return (
-      <div>
-          My Profile Page
-      </div>
-    )
-  }
+            
+        </div>
+      )
+    }
 }
 
 export default MyProfilePage

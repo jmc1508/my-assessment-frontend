@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { Route, Link, Switch} from "react-router-dom";
+import { Route, Switch} from "react-router-dom";
 import axios from 'axios';
 
 import HomePage from './pages/HomePage';
 import Navibar from './components/Navibar';
-import UserProfilePage from './pages/UserProfilePage';
 import MyProfilePage from './pages/MyProfilePage';
+
 
 
 
@@ -48,12 +48,14 @@ class App extends Component {
 
     return (
       <div className="App">
+        {/* Component - Navbar */}
         <Navibar/>
 
+        
+        {/* Routes */}
         <Switch>
           <Route exact path="/" component={props=> <HomePage users={users} {...props}/> } />
           <Route path="/users/me" component={props=> <MyProfilePage users={users} {...props}/>}/>
-          <Route path="/users/:id" component={props=> <UserProfilePage users={users} {...props}/>} />
         </Switch>
 
       </div>
