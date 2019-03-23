@@ -14,7 +14,7 @@ class MyProfilePage extends Component {
       dismissAlert:false,
     }
 
-    
+
     // Make API request
     componentDidMount = () => {
 
@@ -52,7 +52,7 @@ class MyProfilePage extends Component {
         <div>
         {/* If logged in, allow user to fill up profile page */}
             {jwt?
-            <EditProfile email={email} username={username} password={password} dismissAlert={dismissAlert}/>
+            <EditProfile email={email} username={username} password={password} hasErrors={hasErrors} errors={errors} dismissAlert={dismissAlert}/>
             :
             <h1>You are not authorised to view this page</h1>}
 

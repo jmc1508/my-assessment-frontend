@@ -5,6 +5,7 @@ import {Form,
         Button, 
         Container, 
         Divider,
+        Image,
         Message} from 'semantic-ui-react'
 // API
 import axios from 'axios'
@@ -35,9 +36,10 @@ class EditProfile extends Component {
     // Dismiss Alert - Pass
     handleDismissPassAlert=()=>{
         this.setState({success:!this.state.success})
-      }
+    }
 
-    // Axios - submit data to backend
+
+    // Axios - submit edit data to backend
     handleSubmit = event => {
         const jwt= localStorage.getItem('jwt')
         event.preventDefault()
@@ -73,7 +75,13 @@ class EditProfile extends Component {
         })
     
       }
-      
+    
+    //   Axios - delete account
+    handleDelete=event=>{
+        const jwt= localStorage.getItem('jwt')
+        event.preventDefault()
+        console.log('Delete')
+    } 
   
       // Email validation
 
@@ -84,7 +92,7 @@ class EditProfile extends Component {
 
     render() {
         // Props
-        const {email,username,password}=this.props
+        const {email,username,password,handleDismissPassAlert,success1}=this.props
         const {editEmail,editUsername, success, hasErrors,errors}= this.state
 
         return (
@@ -97,6 +105,7 @@ class EditProfile extends Component {
                 header='Your profile has been successfully updated'
               />:null
             }
+            
 
             {/* Alert - unsuccessful update */}
             {hasErrors?
@@ -113,31 +122,49 @@ class EditProfile extends Component {
                 <Grid.Row >
                 {/* Column: Put profile photo */}
                     <Grid.Column width={6}>
-
-
+                    
+                        <Image size='large' src="https://react.semantic-ui.com/images/wireframe/image.png"/>
 
                     </Grid.Column>
-                {/* Column: Form data */}
+                {/* Column: Edit form data */}
                     <Grid.Column width={10}>
                         <Container textAlign='justified'>
-                            <p>Edit your user data here. You can also delete your account.</p>
-                            <p>Your Information</p>
+                            <h3>Your Information</h3>
+                            <p>Edit your user data here.</p>
                             
                         </Container>
 
 
                         <Divider/>
 
-                        <Form size='large'onSubmit={this.handleSubmit}>
-                {/* Username */}
-                            <Form.Input name='editUsername' label='Username' type='username' onChange={this.handleInput}  defaultValue={username}/>
-                {/* Email */}
-                            <Form.Input name='editEmail' label='E-mail' type='email' onChange={this.handleInput}  defaultValue={email}/>
-                {/* Password */}
-                            <Form.Input name='editPassword' label='Password' type='password' onChange={this.handleInput}/>
-                {/* Button */}
-                            <Button color='teal' >Submit</Button>
+                        <Container textAlign='left'>
+                            <Form size='large'onSubmit={this.handleSubmit}>
+                            {/* Username */}
+                                <Form.Input name='editUsername' label='Username' type='username' onChange={this.handleInput}  defaultValue={username}/>
+                            {/* Email */}
+                                <Form.Input name='editEmail' label='E-mail' type='email' onChange={this.handleInput}  defaultValue={email}/>
+                            {/* Password */}
+                                <Form.Input name='editPassword' label='Password' type='password' onChange={this.handleInput}/>
+                            {/* Button */}
+
+                                <Button color='teal' >Submit</Button>
+                            </Form>
+                        </Container>
+                        <br/>
+                {/* Column: delete account */}
+
+                        <Container textAlign='justified'>
+                            <h3>Delete your account</h3>
+                            <p>If you really want to leave us, you may do so. Note that this action is irreversible!</p>
+
+                            
+                        <Divider/>
+                        <Form onSubmit={this.handleDelete}>
+                            <Button color='red' >Delete</Button>
                         </Form>
+
+                        </Container>
+
 
                     </Grid.Column>
 
