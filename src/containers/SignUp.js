@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import { Button, 
         Form,
         Modal,
@@ -34,8 +33,9 @@ class SignUp extends Component {
       })
       .then(response => {
           console.log(response)
+          localStorage.setItem('myData',JSON.stringify(response.data))
+          localStorage.setItem('jwt', response.data.auth_token)
           setTimeout(this.props.toggle,1000)
-
           this.setState({hasErrors:false, 
                           success:response.data.message,
                          })          
@@ -43,7 +43,10 @@ class SignUp extends Component {
 
       .catch(error=>{
           console.log('ERROR: ', error)
-
+          // this.props.toggleSignupFailed()
+          this.setState({errors:error.response.data.message, 
+                        success:false, 
+                        hasErrors:!this.state.hasErrors})
       })
   
     }
@@ -64,8 +67,8 @@ class SignUp extends Component {
 
   render() {
 
-    const{username,email,password, success, hasErrors}= this.state;
-    const{show,showModal,toggle,toggleSignupAlert}=this.props;
+    const{username,email,password, success, hasErrors, errors}= this.state;
+    const{show,showModal,toggle,toggleSignupAlert,toggleSignupFailed}=this.props;
 
     return (
       <div>
@@ -74,15 +77,25 @@ class SignUp extends Component {
             <Modal.Header>
                 Sign Up
             </Modal.Header>
-
-            {success?
+            {/* Alert - successful signup */}
+            {success && hasErrors==''?
               <Message
                 success
                 header='Your user registration was successful'
                 content='You have now been logged in'
-              />:
-              null
-              }
+              />:null
+            }
+
+            {/* Alert - unsuccessful signup */}
+            {hasErrors && errors?
+              <Message
+                negative
+                header='User registration unsuccessful:'
+                content={errors.map((error,index)=> <p>{error}</p>)}
+                
+              />:null
+            }
+
 
             {/* Body */}
             <Modal.Content>
@@ -92,7 +105,7 @@ class SignUp extends Component {
                   <Form.Input name='password' type='password' label='Password' onChange={this.handleInput}></Form.Input>
                   
                   <Form.Field>
-                    <Button content='Primary' disabled={email && password && username && this.validateEmail(email) ? false: true} type='submit'>Sign Up</Button>
+                    <Button color='teal' disabled={email && password && username && this.validateEmail(email) ? false: true} type='submit'>Sign Up</Button>
                   </Form.Field>
               </Form>
             </Modal.Content>

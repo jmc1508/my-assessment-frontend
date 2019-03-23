@@ -15,11 +15,11 @@ class Modal extends Component {
     render() {
         
         const {showSignUp}= this.state;
-        const {show, showModal,toggle,toggleSignupAlert}=this.props;
+        const {show, showModal,toggle,toggleSignupAlert,toggleSignupFailed}=this.props;
         
         return (
         <div>
-            {showSignUp?<SignUp show={show} showModal={showModal} toggle={toggle}/>:<Login show={show} showModal={showModal} toggle={toggle} showSignUp={this.showSignUp}/>}
+            {showSignUp?<SignUp show={show} showModal={showModal} toggle={toggle} toggleSignupFailed={toggleSignupFailed}/>:<Login show={show} showModal={showModal} toggle={toggle} showSignUp={this.showSignUp}/>}
         </div>
         )
     }

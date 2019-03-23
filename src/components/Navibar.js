@@ -12,7 +12,7 @@ class Navibar extends Component {
         show:false,
         signupIsToggled: false,
         logoutIsToggled:false,
-      
+        signupFailed:false,
     }
 
     // Signup: show modal
@@ -29,11 +29,15 @@ class Navibar extends Component {
         this.setState({signupIsToggled:!this.state.signupIsToggled})
     }
 
-    // Toggle signup ALERT
+    // Toggle logout ALERT
     toggleLogoutAlert=()=>{
         this.setState({logoutIsToggled:!this.state.logoutIsToggled})
     }
 
+    // Toggle signup failed
+    toggleSignupFailed=()=>{
+        this.setState({signupFailed:!this.state.signupFailed})
+    }
 
     // Handle Logout
     handleLogout=()=>{
@@ -50,7 +54,7 @@ class Navibar extends Component {
 
     render() {
         
-        const {show,signupIsToggled,logoutIsToggled}= this.state
+        const {show,signupIsToggled,logoutIsToggled, signupFailed}= this.state
 
         return (
             <div>
@@ -71,9 +75,17 @@ class Navibar extends Component {
                     />
                     :
                     null}
-
+                
+                {/* Alert Message: Signup Failed */}
+                {signupFailed?
+                    <Message onDismiss={this.handleDismiss}
+                        negative
+                        header='Your signup failed'
+                    />
+                :null}
+                
                 {/* Toggle:Show Modal */}
-                {show? <Modal show={show} showModal={this.showModal} toggle={this.toggle} toggleSignupAlert={this.toggleSignupAlert}/>:null}
+                {show? <Modal show={show} showModal={this.showModal} toggle={this.toggle} toggleSignupAlert={this.toggleSignupAlert} toggleSignupFailed={this.toggleSignupFailed}/>:null}
 
                 {/* Menu Items */}
                 <Menu>

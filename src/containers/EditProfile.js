@@ -23,17 +23,17 @@ class EditProfile extends Component {
     }
     
 
-    // Handle Input
+    // Handle Form Inpu
 
     handleInput=event=>{
         this.setState({[event.target.name]:event.target.value})
       }
+
+    // Axios - submit to backend
     
     render() {
         // Props
         const {email,username,password}=this.props
-        // State
-        // const {editEmail,editPassword,editUsername}= this.state
 
         return (
             <div>

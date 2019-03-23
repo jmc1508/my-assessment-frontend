@@ -81,7 +81,7 @@ class Login extends Component {
                 content='You have now been logged in'
               />:
               null
-              }
+            }
           {/* Message: Alert if failed login */}
           {hasErrors && success==''?
               <Message  
