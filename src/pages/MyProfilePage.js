@@ -11,11 +11,10 @@ class MyProfilePage extends Component {
       email:'',
       username:'',
       password:'',
+      dismissAlert:false,
     }
 
-
-
-
+    
     // Make API request
     componentDidMount = () => {
 
@@ -48,12 +47,12 @@ class MyProfilePage extends Component {
     
     render() {
       const jwt=localStorage.getItem('jwt')
-      const {email,username,password}=this.state
+      const {email,username,password,dismissAlert, hasErrors,errors}=this.state
       return (
         <div>
         {/* If logged in, allow user to fill up profile page */}
             {jwt?
-            <EditProfile email={email} username={username} password={password}/>
+            <EditProfile email={email} username={username} password={password} dismissAlert={dismissAlert}/>
             :
             <h1>You are not authorised to view this page</h1>}
 
