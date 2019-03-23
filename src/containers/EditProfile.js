@@ -8,11 +8,36 @@ import {Form,
         Segment} from 'semantic-ui-react'
 
 class EditProfile extends Component {
-    render() {
 
-        const {email,username}=this.props
+
+    state={
+        editEmail:'',
+        editUsername:'',
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        return{
+            editEmail:props.email,
+            editUsername:props.username,
+        }
+    }
+    
+
+    // Handle Input
+
+    handleInput=event=>{
+        this.setState({[event.target.name]:event.target.value})
+      }
+    
+    render() {
+        // Props
+        const {email,username,password}=this.props
+        // State
+        // const {editEmail,editPassword,editUsername}= this.state
 
         return (
+            <div>
+
             <Grid celled style={{height:'100vh'}}>
                 <Grid.Row >
                 {/* Column: Put profile photo */}
@@ -34,11 +59,11 @@ class EditProfile extends Component {
 
                         <Form size='large'>
                 {/* Username */}
-                            <Form.Input label='Username' type='username' defaultValue={username} />
+                            <Form.Input name='editUsername' label='Username' type='username' onChange={this.handleInput}  defaultValue={username} />
                 {/* Email */}
-                            <Form.Input label='E-mail' type='email' defaultValue={email}/>
+                            <Form.Input name='editEmail' label='E-mail' type='email' onChange={this.handleInput}  defaultValue={email}/>
                 {/* Password */}
-                            <Form.Input label='Password' type='password'/>
+                            <Form.Input name='editPassword' label='Password' type='password' onChange={this.handleInput}/>
                 {/* Button */}
                             <Button color='teal'>Submit</Button>
                         </Form>
@@ -47,6 +72,8 @@ class EditProfile extends Component {
 
                 </Grid.Row>
             </Grid>
+
+            </div>
 
             
         );
