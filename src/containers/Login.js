@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import { Button, 
         Form,
         Modal,
@@ -42,6 +42,7 @@ class Login extends Component {
           setTimeout(this.props.toggle,1000)
           localStorage.setItem('myData',JSON.stringify(response.data))
           localStorage.setItem('jwt', response.data.auth_token)
+          this.props.history.push("/users/me")
           this.setState({success:response.data.message,hasErrors:''})
       })
 
@@ -66,7 +67,7 @@ class Login extends Component {
     const{email,password,success,hasErrors}=this.state
     return (
       <div>
-        <Modal open={show} onClose={toggle} size='mini' closeIcon>
+        <Modal open={show} onClose={toggle} size='tiny' closeIcon>
           {/* Header */}
           <Modal.Header>
               Login
@@ -113,4 +114,4 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default withRouter(Login)

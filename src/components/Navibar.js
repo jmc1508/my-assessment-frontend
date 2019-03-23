@@ -4,7 +4,7 @@ import {Menu,
         Icon,
         Message} from 'semantic-ui-react'
 import Modal from '../components/Modal'
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
 
 class Navibar extends Component {
 
@@ -40,6 +40,7 @@ class Navibar extends Component {
         localStorage.removeItem('jwt')
         this.toggleLogoutAlert()
         this.forceUpdate()
+        this.props.history.push("/")
     }
 
     // Dismiss Alert
@@ -105,4 +106,4 @@ class Navibar extends Component {
     }
 }
 
-export default Navibar
+export default withRouter(Navibar)
