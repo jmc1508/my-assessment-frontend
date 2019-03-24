@@ -17,9 +17,6 @@ class EditProfile extends Component {
         editEmail:'',
         editUsername:'',
         editPassword:'',
-        success:false,
-        hasErrors:'',
-        errors:[],
     }
 
     // Handle Form Input
@@ -27,18 +24,6 @@ class EditProfile extends Component {
         this.setState({[event.target.name]:event.target.value})
       }
     
-    // Dismiss Alert - Fail
-    handleDismissFailAlert=()=>{
-        this.setState({hasErrors:!this.state.hasErrors,
-                      errors:[]})
-      }
-
-    // Dismiss Alert - Pass
-    handleDismissPassAlert=()=>{
-        this.setState({success:!this.state.success})
-    }
-
-
     // Axios - submit edit data to backend
     handleSubmit = event => {
         const jwt= localStorage.getItem('jwt')
@@ -63,15 +48,15 @@ class EditProfile extends Component {
         })
         .then(response => {
             console.log(response)
-            this.setState({success:!this.state.success,
-                            hasErrors:false})
+            this.props.handleSubmitStates()
+
             
         })
   
         .catch(error=>{
             console.log('ERROR: ', error)
-            this.setState({hasErrors:!this.state.hasErrors,errors:error.response.data.message})
-            
+            var error_msg=error.response.data.message
+            this.props.handleSubmitErrors(error_msg)            
         })
     
       }
@@ -92,15 +77,15 @@ class EditProfile extends Component {
 
     render() {
         // Props
-        const {email,username,password,handleDismissPassAlert,success1}=this.props
-        const {editEmail,editUsername, success, hasErrors,errors}= this.state
+        const {email,username,password,handleDismissPassAlert,dismissAlert, success, hasErrors,errors,handleSubmitStates, handleSubmitErrors, handleDismissFailAlert}=this.props
+        const {editEmail,editUsername,}= this.state
 
         return (
             <div>
             {/* Alert - successful update */}
             {success?
               <Message
-                onDismiss={this.handleDismissPassAlert}
+                onDismiss={handleDismissPassAlert}
                 success
                 header='Your profile has been successfully updated'
               />:null
@@ -110,11 +95,10 @@ class EditProfile extends Component {
             {/* Alert - unsuccessful update */}
             {hasErrors?
               <Message
-                onDismiss={this.handleDismissFailAlert}
+                onDismiss={handleDismissFailAlert}
                 negative
                 header='User update unsuccessful:'
-                content={errors.map((error,index)=> <p>{error}</p>)}
-                
+                content={errors.map((error,index)=> <p>{error}</p>)} 
               />:null
             }
 

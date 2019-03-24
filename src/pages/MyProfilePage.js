@@ -6,12 +6,38 @@ import EditProfile from '../containers/EditProfile'
 class MyProfilePage extends Component {
 
     state={
-      hasErrors:false,
-      errors:[],
       email:'',
       username:'',
       password:'',
       dismissAlert:false,
+      
+      success:false,
+      hasErrors:false,
+      errors:[],
+    }
+    // Dismiss Alert - Fail
+    handleDismissFailAlert=()=>{
+      this.setState({hasErrors:!this.state.hasErrors,
+                    errors:[]})
+    }
+
+    // Dismiss Alert - Pass
+    handleDismissPassAlert=()=>{
+      this.setState({dismissAlert:!this.state.dismissAlert,
+                    success:!this.state.success})
+    }
+
+    // Handle submit successful
+    handleSubmitStates=()=>{
+      this.setState({success:!this.state.success,
+                    hasErrors:false,
+                    })
+    }
+
+    // Handle submit errors
+    handleSubmitErrors=(error_msg)=>{
+      this.setState({hasErrors:!this.state.hasErrors,
+                    errors:error_msg})
     }
 
 
@@ -47,12 +73,13 @@ class MyProfilePage extends Component {
     
     render() {
       const jwt=localStorage.getItem('jwt')
-      const {email,username,password,dismissAlert, hasErrors,errors}=this.state
+      const {email,username,password,dismissAlert, hasErrors,errors, success}=this.state
+
       return (
         <div>
         {/* If logged in, allow user to fill up profile page */}
             {jwt?
-            <EditProfile email={email} username={username} password={password} hasErrors={hasErrors} errors={errors} dismissAlert={dismissAlert}/>
+            <EditProfile email={email} username={username} password={password} hasErrors={hasErrors} errors={errors} success={success} dismissAlert={dismissAlert} handleDismissPassAlert={this.handleDismissPassAlert} handleSubmitStates={this.handleSubmitStates} handleSubmitErrors={this.handleSubmitErrors} handleDismissFailAlert={this.handleDismissFailAlert}/>
             :
             <h1>You are not authorised to view this page</h1>}
 
