@@ -7,44 +7,15 @@ import axios from 'axios';
 import HomePage from './pages/HomePage';
 import Navibar from './components/Navibar';
 import MyProfilePage from './pages/MyProfilePage';
+import SignUp from './containers/SignUp'
 
 
 
 
 class App extends Component {
   
-  state={
-    users:[],
-  }
-
-  componentDidMount = () => {
-    
-      const jwt= localStorage.getItem('jwt')
-
-      axios({
-          
-        method: 'GET',
-        url: 'http://127.0.0.1:5000/api/v1/users/',
-
-      
-    })
-    .then(response => {
-        console.log(response)
-        const users=response.data
-        this.setState({users:users})
-      
-    })
-
-    .catch(error=>{
-        console.log('ERROR: ', error)
- 
-      })
-    }
-  
-
   render() {
 
-    const {users}=this.state;
 
     return (
       <div className="App">
@@ -54,8 +25,9 @@ class App extends Component {
         
         {/* Routes */}
         <Switch>
-          <Route exact path="/" component={props=> <HomePage users={users} {...props}/> } />
-          <Route path="/users/me" component={props=> <MyProfilePage users={users} {...props}/>}/>
+          <Route exact path="/" component={props=> <HomePage {...props}/> } />
+          <Route path="/users/me" component={props=> <MyProfilePage {...props}/>}/>
+          {/* <Route path="/users/me" component={props=> <MyProfilePage {...props}/>}/> */}
         </Switch>
 
       </div>

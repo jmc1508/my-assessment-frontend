@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import EditProfile from '../containers/EditProfile'
+import Error401 from '../components/Error401'
+
+
 
 class MyProfilePage extends Component {
 
@@ -93,8 +96,7 @@ class MyProfilePage extends Component {
             {jwt?
             <EditProfile email={email} username={username} password={password} update_hasErrors={update_hasErrors} errors={errors} success={success} update_success={update_success} delete_success={delete_success}  handleDeleteStates={this.handleDeleteStates} dismissAlert={dismissAlert} handleDismissPassAlert={this.handleDismissPassAlert} handleSubmitStates={this.handleSubmitStates} handleSubmitErrors={this.handleSubmitErrors} handleDismissFailAlert={this.handleDismissFailAlert} handleDismissDeleteAlert={this.handleDismissDeleteAlert}/>
             :
-            <h1>You are not authorised to view this page</h1>}
-
+            <Error401/>}
             
         </div>
       )

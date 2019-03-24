@@ -63,11 +63,11 @@ class Login extends Component {
 
 
   render() {
-    const{show, toggle, showSignUp}= this.props
+    const{show, toggle, showSignUp, showSignUpModal,showModal}= this.props
     const{email,password,success,hasErrors}=this.state
     return (
       <div>
-        <Modal open={show} onClose={toggle} size='tiny' closeIcon>
+        <Modal open={show} onClose={showModal} size='tiny' closeIcon>
           {/* Header */}
           <Modal.Header>
               Login
@@ -101,10 +101,9 @@ class Login extends Component {
                 <Form.Field>
                   <Button color='teal' disabled={email && password && this.validateEmail(email) ? false: true} type='submit'>Login</Button>
                 </Form.Field>
-
           {/* Toggle SignUp Page */}
                 <Form.Field>
-                  <Link to="/" onClick={showSignUp}>If you are not an existing user, sign up here!</Link>
+                  <Link to="/" onClick={showSignUpModal}>If you are not an existing user, sign up here!</Link>
                 </Form.Field>
             </Form>
           </Modal.Content>

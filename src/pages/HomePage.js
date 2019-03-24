@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import JumbotronFluid from '../components/JumobtronFluid'
+import JumbotronFluid from '../components/JumbotronFluid'
 
 class HomePage extends Component {
 

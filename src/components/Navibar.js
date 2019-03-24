@@ -3,8 +3,16 @@ import {Menu,
         Button,
         Icon,
         Message} from 'semantic-ui-react'
+// Components
 import Modal from '../components/Modal'
+import SignUp from '../containers/SignUp'
+
 import {Link,withRouter} from 'react-router-dom'
+
+// Style - fix menu item margin issue
+const menuItem={
+    marginLeft:'0',
+}
 
 class Navibar extends Component {
 
@@ -13,27 +21,31 @@ class Navibar extends Component {
         signupIsToggled: false,
         logoutIsToggled:false,
         signupFailed:false,
+        showSignUp:false,
     }
 
-    // Signup: show modal
+    // Show modal
     showModal = () => {
-        this.setState({ show: !this.state.show });
-      };
-    // Close Modal
-    toggle=()=>{
-        this.setState({show:!this.state.show});
+        this.setState({ show:!this.state.show});
+    }
+    // SignUp Modal - display from Modal
+    showSignUpModal=()=>{
+        this.setState({showSignUp:!this.state.showSignUp})
     }
 
+    // SignUp Modal - to refresh state when dismissing
+    toggle=()=>{
+        this.setState({show:!this.state.show,
+                        showSignUp:!this.state.showSignUp})
+    }
     // Toggle signup ALERT
     toggleSignupAlert=()=>{
         this.setState({signupIsToggled:!this.state.signupIsToggled})
     }
-
     // Toggle logout ALERT
     toggleLogoutAlert=()=>{
         this.setState({logoutIsToggled:!this.state.logoutIsToggled})
     }
-
     // Toggle signup failed
     toggleSignupFailed=()=>{
         this.setState({signupFailed:!this.state.signupFailed})
@@ -54,7 +66,7 @@ class Navibar extends Component {
 
     render() {
         
-        const {show,signupIsToggled,logoutIsToggled, signupFailed}= this.state
+        const {show,signupIsToggled,logoutIsToggled, signupFailed, showSignUp}= this.state
 
         return (
             <div>
@@ -85,10 +97,10 @@ class Navibar extends Component {
                 :null}
                 
                 {/* Toggle:Show Modal */}
-                {show? <Modal show={show} showModal={this.showModal} toggle={this.toggle} toggleSignupAlert={this.toggleSignupAlert} toggleSignupFailed={this.toggleSignupFailed}/>:null}
+                {show? <Modal show={show} showModal={this.showModal} showSignUp={showSignUp} toggle={this.toggle} toggleSignupAlert={this.toggleSignupAlert} toggleSignupFailed={this.toggleSignupFailed} showSignUpModal={this.showSignUpModal}/>:null}
 
                 {/* Menu Items */}
-                <Menu>
+                <Menu fixed='top'>
                     <Menu.Item>
                         <Icon name='chart line' size='large' />
                         <Link to="/">Homepage</Link>
@@ -99,18 +111,26 @@ class Navibar extends Component {
                         <Icon name='user circle' size='large'/>
                         <Link to="/users/me">My Profile</Link>
                     </Menu.Item>
+                
+                {/* Companies - API */}
+                
+                {/* Signup */}
+                    <Menu.Item onClick={this.toggle}>
+                        <Icon name='signup' size='large'/>
+                        Sign Up
+                    </Menu.Item>
 
                 {/* Login/Logout */}
                     {localStorage.getItem('jwt') ?
-                        <Menu.Item position='right' floated='right' onClick={this.handleLogout}>
+                        <Menu.Item onClick={this.handleLogout}>
                             <Icon name='sign-out' size='large'/>
                             Logout
                         </Menu.Item>
                         :
-                        <Menu.Item position='right' floated='right' onClick={this.showModal}>
+                        <Menu.Item onClick={this.showModal}>
                             <Icon name='sign-in' size='large'/>
                             Login
-                        </Menu.Item>
+                        </Menu.Item> 
                     }
                 </Menu>
             </div>

@@ -10,6 +10,10 @@ import {Form,
 // API
 import axios from 'axios'
 
+const gridBody={
+    marginTop:'48px',
+    height:'100vh'
+}
 
 class EditProfile extends Component {
 
@@ -130,7 +134,7 @@ class EditProfile extends Component {
               />:null
             }
 
-            <Grid celled style={{height:'100vh'}}>
+            <Grid celled style={gridBody}>
                 <Grid.Row >
                 {/* Column: Put profile photo */}
                     <Grid.Column width={6}>
