@@ -4,8 +4,6 @@ import axios from 'axios'
 import EditProfile from '../containers/EditProfile'
 import Error401 from '../components/Error401'
 
-
-
 class MyProfilePage extends Component {
 
     state={
@@ -85,7 +83,7 @@ class MyProfilePage extends Component {
         })
 
     }
-    
+    // Render
     render() {
       const jwt=localStorage.getItem('jwt')
       const {email,username,password,dismissAlert, update_hasErrors,errors, success, update_success, delete_success}=this.state

@@ -102,18 +102,28 @@ class Navibar extends Component {
                 {/* Menu Items */}
                 <Menu fixed='top'>
                     <Menu.Item>
-                        <Icon name='chart line' size='large' />
+                        <Icon name='home' size='large' />
                         <Link to="/">Homepage</Link>
                     </Menu.Item>
                 
                 {/* My Profile Page */}
-                    <Menu.Item position='left'>
+                    <Menu.Item >
                         <Icon name='user circle' size='large'/>
                         <Link to="/users/me">My Profile</Link>
                     </Menu.Item>
                 
                 {/* Companies - API */}
+                    <Menu.Item >
+                        <Icon name='chart line' size='large'/>
+                        <Link to="/companies">Companies</Link>
+                    </Menu.Item>
                 
+                {/* Sectors - API */}
+                <Menu.Item position ='left'>
+                        <Icon name='chart line' size='large'/>
+                        <Link to="/sectors">Sectors</Link>
+                    </Menu.Item>
+
                 {/* Signup */}
                     <Menu.Item onClick={this.toggle}>
                         <Icon name='signup' size='large'/>
