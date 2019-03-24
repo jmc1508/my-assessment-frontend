@@ -49,8 +49,6 @@ class EditProfile extends Component {
         .then(response => {
             console.log(response)
             this.props.handleSubmitStates()
-
-            
         })
   
         .catch(error=>{
@@ -65,7 +63,27 @@ class EditProfile extends Component {
     handleDelete=event=>{
         const jwt= localStorage.getItem('jwt')
         event.preventDefault()
-        console.log('Delete')
+        console.log('Delete process')
+
+
+        axios({
+            method: 'POST',
+            url: 'http://127.0.0.1:5000/api/v1/users/me/delete',
+            
+            headers :{
+                Authorization: `Bearer ${jwt}`
+            },
+
+        })
+        .then(response => {
+            console.log(response)
+            this.props.handleDeleteStates()
+            
+        })
+  
+        .catch(error=>{
+            console.log('ERROR: ', error)
+        })
     } 
   
       // Email validation
@@ -77,13 +95,14 @@ class EditProfile extends Component {
 
     render() {
         // Props
-        const {email,username,password,handleDismissPassAlert,dismissAlert, success, hasErrors,errors,handleSubmitStates, handleSubmitErrors, handleDismissFailAlert}=this.props
+        const {email,username,password,handleDismissPassAlert, success,update_success, delete_success, update_hasErrors,errors,handleSubmitStates, handleSubmitErrors, handleDismissFailAlert, handleDeleteStates, handleDismissDeleteAlert}=this.props
+        // States
         const {editEmail,editUsername,}= this.state
 
         return (
             <div>
             {/* Alert - successful update */}
-            {success?
+            {update_success?
               <Message
                 onDismiss={handleDismissPassAlert}
                 success
@@ -93,12 +112,21 @@ class EditProfile extends Component {
             
 
             {/* Alert - unsuccessful update */}
-            {hasErrors?
+            {update_hasErrors?
               <Message
                 onDismiss={handleDismissFailAlert}
                 negative
                 header='User update unsuccessful:'
                 content={errors.map((error,index)=> <p>{error}</p>)} 
+              />:null
+            }
+
+            {/* Alert - successful delete */}
+            {delete_success?
+              <Message
+              onDismiss={handleDismissDeleteAlert}
+                success
+                header='Your profile has been successfully deleted'
               />:null
             }
 

@@ -9,37 +9,49 @@ class MyProfilePage extends Component {
       email:'',
       username:'',
       password:'',
-      dismissAlert:false,
       
       success:false,
-      hasErrors:false,
       errors:[],
+      
+      update_success:false,
+      update_hasErrors:false,
+
+      delete_success:false,
+      delete_hasErrors:false,
     }
     // Dismiss Alert - Fail
     handleDismissFailAlert=()=>{
-      this.setState({hasErrors:!this.state.hasErrors,
+      this.setState({update_hasErrors:!this.state.update_hasErrors,
                     errors:[]})
     }
 
     // Dismiss Alert - Pass
     handleDismissPassAlert=()=>{
-      this.setState({dismissAlert:!this.state.dismissAlert,
-                    success:!this.state.success})
+      this.setState({update_success:!this.state.update_success})
+    }
+
+    // Dismiss Alert - Delete
+    handleDismissDeleteAlert=()=>{
+      localStorage.removeItem('jwt')
+      this.setState({delete_success:!this.state.delete_success})
     }
 
     // Handle submit successful
     handleSubmitStates=()=>{
-      this.setState({success:!this.state.success,
-                    hasErrors:false,
-                    })
+      this.setState({update_success:!this.state.update_success,
+                    update_hasErrors:false})
     }
 
     // Handle submit errors
     handleSubmitErrors=(error_msg)=>{
-      this.setState({hasErrors:!this.state.hasErrors,
+      this.setState({update_hasErrors:!this.state.update_hasErrors,
                     errors:error_msg})
     }
 
+    // Handle delete successful
+    handleDeleteStates=()=>{
+      this.setState({delete_success:!this.state.delete_success})
+    }
 
     // Make API request
     componentDidMount = () => {
@@ -66,20 +78,20 @@ class MyProfilePage extends Component {
       .catch(error=>{
           console.log('ERROR: ', error)
           this.setState({errors:error.response.data.error,
-                        hasErrors:!this.state.hasErrors})
+                        update_hasErrors:!this.state.update_hasErrors})
         })
 
     }
     
     render() {
       const jwt=localStorage.getItem('jwt')
-      const {email,username,password,dismissAlert, hasErrors,errors, success}=this.state
+      const {email,username,password,dismissAlert, update_hasErrors,errors, success, update_success, delete_success}=this.state
 
       return (
         <div>
         {/* If logged in, allow user to fill up profile page */}
             {jwt?
-            <EditProfile email={email} username={username} password={password} hasErrors={hasErrors} errors={errors} success={success} dismissAlert={dismissAlert} handleDismissPassAlert={this.handleDismissPassAlert} handleSubmitStates={this.handleSubmitStates} handleSubmitErrors={this.handleSubmitErrors} handleDismissFailAlert={this.handleDismissFailAlert}/>
+            <EditProfile email={email} username={username} password={password} update_hasErrors={update_hasErrors} errors={errors} success={success} update_success={update_success} delete_success={delete_success}  handleDeleteStates={this.handleDeleteStates} dismissAlert={dismissAlert} handleDismissPassAlert={this.handleDismissPassAlert} handleSubmitStates={this.handleSubmitStates} handleSubmitErrors={this.handleSubmitErrors} handleDismissFailAlert={this.handleDismissFailAlert} handleDismissDeleteAlert={this.handleDismissDeleteAlert}/>
             :
             <h1>You are not authorised to view this page</h1>}
 

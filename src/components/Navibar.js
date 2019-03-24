@@ -47,16 +47,10 @@ class Navibar extends Component {
         this.props.history.push("/")
     }
 
-
-
     // Dismiss Logout Alert
     handleDismiss = () => {
         this.setState({ logoutIsToggled:!this.state.logoutIsToggled })
     }
-
-    
-
- 
 
     render() {
         
