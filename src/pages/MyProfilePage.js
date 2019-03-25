@@ -37,7 +37,8 @@ class MyProfilePage extends Component {
     // Dismiss Alert - Delete
     handleDismissDeleteAlert=()=>{
       localStorage.removeItem('jwt')
-      this.setState({delete_success:!this.state.delete_success})
+      this.setState({delete_success:!this.state.delete_success,
+                    redirect_home:!this.state.redirect_home})
     }
 
     // Handle submit successful
@@ -54,9 +55,11 @@ class MyProfilePage extends Component {
 
     // Handle delete successful
     handleDeleteStates=()=>{
-      this.setState({delete_success:!this.state.delete_success,
-                      redirect_home:!this.state.redirect_home})
+      this.setState({delete_success:!this.state.delete_success
+                      })
     }
+
+    // redirect_home:!this.state.redirect_home
 
     // Make API request
     componentDidMount = () => {
