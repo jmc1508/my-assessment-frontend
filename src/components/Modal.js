@@ -12,9 +12,7 @@ class Modal extends Component {
         
         return (
         <div>
-            {showSignUp?<SignUp show={show} showModal={showModal} toggle={toggle} toggleSignupFailed={toggleSignupFailed} showSignUpModal={showSignUpModal}/>:<Login show={show} showModal={showModal} toggle={toggle} showSignUp={showSignUp} showSignUpModal={showSignUpModal}/>}
-            {/* {showSignUp?null:<Login show={show} showModal={showModal} toggle={toggle} showSignUp={this.showSignUp}/>} */}
-
+            {showSignUp?<SignUp show={show} showSignUp={showSignUp} showModal={showModal} toggle={toggle} toggleSignupFailed={toggleSignupFailed} showSignUpModal={showSignUpModal}/>:<Login show={show} showModal={showModal} toggle={toggle} showSignUp={showSignUp} showSignUpModal={showSignUpModal}/>}
         </div>
         )
     }

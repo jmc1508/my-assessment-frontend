@@ -15,7 +15,7 @@ class Login extends Component {
           email:'',
           password:'',
           success:'',
-          error:[],
+          errors:[],
           hasErrors:'',
       }
 

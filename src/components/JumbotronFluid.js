@@ -3,9 +3,9 @@ import {Header,
         Grid} from 'semantic-ui-react'
 
 const jumbotronBody={
-  height:'30vh',
+  height:'40vh',
   backgroundImage:'url(https://mdbootstrap.com/img/Photos/Others/gradient1.jpg)',
-  marginTop:'47px',
+  paddingTop:'46px',
 }
 
 const gridBody ={

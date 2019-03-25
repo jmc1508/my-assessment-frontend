@@ -68,7 +68,7 @@ class SignUp extends Component {
   render() {
 
     const{username,email,password, success, hasErrors, errors}= this.state;
-    const{show,showModal,toggle,toggleSignupAlert,toggleSignupFailed}=this.props;
+    const{show,showModal, showSignUp,toggle,toggleSignupAlert,toggleSignupFailed}=this.props;
 
     return (
       <div>

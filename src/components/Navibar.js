@@ -14,6 +14,11 @@ const menuItem={
     marginLeft:'0',
 }
 
+const messageStyle={
+    marginTop:'47px',
+    marginBottom:'0'
+}
+
 class Navibar extends Component {
 
     state={
@@ -30,40 +35,40 @@ class Navibar extends Component {
     }
     // SignUp Modal - display from Modal
     showSignUpModal=()=>{
-        this.setState({showSignUp:!this.state.showSignUp})
+        this.setState({showSignUp:!this.state.showSignUp,
+                        show:true})
     }
-
     // SignUp Modal - to refresh state when dismissing
     toggle=()=>{
         this.setState({show:!this.state.show,
-                        showSignUp:!this.state.showSignUp})
+                        showSignUp:false})
+    }
+    // Toggle logout ALERT
+    toggleLogoutAlert=()=>{
+        this.setState({logoutIsToggled:!this.state.logoutIsToggled,
+                        })
     }
     // Toggle signup ALERT
     toggleSignupAlert=()=>{
         this.setState({signupIsToggled:!this.state.signupIsToggled})
     }
-    // Toggle logout ALERT
-    toggleLogoutAlert=()=>{
-        this.setState({logoutIsToggled:!this.state.logoutIsToggled})
-    }
     // Toggle signup failed
     toggleSignupFailed=()=>{
         this.setState({signupFailed:!this.state.signupFailed})
-    }
-
+    }    
     // Handle Logout
     handleLogout=()=>{
         localStorage.removeItem('jwt')
         this.toggleLogoutAlert()
         this.forceUpdate()
         this.props.history.push("/")
+        
     }
-
     // Dismiss Logout Alert
     handleDismiss = () => {
         this.setState({ logoutIsToggled:!this.state.logoutIsToggled })
     }
-
+    // Render
     render() {
         
         const {show,signupIsToggled,logoutIsToggled, signupFailed, showSignUp}= this.state
@@ -81,7 +86,7 @@ class Navibar extends Component {
 
                 {/* Alert Message: Logout Toggled */}
                 {logoutIsToggled?
-                    <Message onDismiss={this.handleDismiss}
+                    <Message style={messageStyle} onDismiss={this.handleDismiss}
                         success
                         header='You have successfully logged out'
                     />
@@ -125,7 +130,7 @@ class Navibar extends Component {
                     </Menu.Item>
 
                 {/* Signup */}
-                    <Menu.Item onClick={this.toggle}>
+                    <Menu.Item onClick={this.showSignUpModal}>
                         <Icon name='signup' size='large'/>
                         Sign Up
                     </Menu.Item>

@@ -11,8 +11,13 @@ import {Form,
 import axios from 'axios'
 
 const gridBody={
-    marginTop:'48px',
+    paddingTop:'48px',
     height:'100vh'
+}
+
+const messageStyle={
+    marginTop:'47px',
+    marginBottom:'0'
 }
 
 class EditProfile extends Component {
@@ -67,8 +72,6 @@ class EditProfile extends Component {
     handleDelete=event=>{
         const jwt= localStorage.getItem('jwt')
         event.preventDefault()
-        console.log('Delete process')
-
 
         axios({
             method: 'POST',
@@ -107,7 +110,7 @@ class EditProfile extends Component {
             <div>
             {/* Alert - successful update */}
             {update_success?
-              <Message
+              <Message style={messageStyle}
                 onDismiss={handleDismissPassAlert}
                 success
                 header='Your profile has been successfully updated'
@@ -117,7 +120,7 @@ class EditProfile extends Component {
 
             {/* Alert - unsuccessful update */}
             {update_hasErrors?
-              <Message
+              <Message style={messageStyle}
                 onDismiss={handleDismissFailAlert}
                 negative
                 header='User update unsuccessful:'
@@ -127,7 +130,7 @@ class EditProfile extends Component {
 
             {/* Alert - successful delete */}
             {delete_success?
-              <Message
+              <Message style={messageStyle}
               onDismiss={handleDismissDeleteAlert}
                 success
                 header='Your profile has been successfully deleted'

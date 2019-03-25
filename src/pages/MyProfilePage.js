@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {Redirect} from 'react-router-dom'
 
 import EditProfile from '../containers/EditProfile'
 import Error401 from '../components/Error401'
@@ -19,6 +20,8 @@ class MyProfilePage extends Component {
 
       delete_success:false,
       delete_hasErrors:false,
+
+      redirect_home:false,
     }
     // Dismiss Alert - Fail
     handleDismissFailAlert=()=>{
@@ -51,7 +54,8 @@ class MyProfilePage extends Component {
 
     // Handle delete successful
     handleDeleteStates=()=>{
-      this.setState({delete_success:!this.state.delete_success})
+      this.setState({delete_success:!this.state.delete_success,
+                      redirect_home:!this.state.redirect_home})
     }
 
     // Make API request
@@ -86,15 +90,19 @@ class MyProfilePage extends Component {
     // Render
     render() {
       const jwt=localStorage.getItem('jwt')
-      const {email,username,password,dismissAlert, update_hasErrors,errors, success, update_success, delete_success}=this.state
+      const {email,username,password,dismissAlert, update_hasErrors,errors, success, update_success, delete_success, redirect_home}=this.state
 
       return (
         <div>
-        {/* If logged in, allow user to fill up profile page */}
+            {/* If logged in, allow user to fill up profile page */}
             {jwt?
             <EditProfile email={email} username={username} password={password} update_hasErrors={update_hasErrors} errors={errors} success={success} update_success={update_success} delete_success={delete_success}  handleDeleteStates={this.handleDeleteStates} dismissAlert={dismissAlert} handleDismissPassAlert={this.handleDismissPassAlert} handleSubmitStates={this.handleSubmitStates} handleSubmitErrors={this.handleSubmitErrors} handleDismissFailAlert={this.handleDismissFailAlert} handleDismissDeleteAlert={this.handleDismissDeleteAlert}/>
             :
             <Error401/>}
+            {/* If logged out, redirect user to home */}
+            {redirect_home?
+            <Redirect to ='/'/>
+            :null}
             
         </div>
       )
