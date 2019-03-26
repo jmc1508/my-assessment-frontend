@@ -9,6 +9,8 @@ import { Button,
 // Add on
 import axios from 'axios'
 
+const url_base=process.env.REACT_APP_URL
+
 
 class Login extends Component {
     state = {
@@ -30,7 +32,7 @@ class Login extends Component {
 
       axios({
           method: 'POST',
-          url: 'https://finalproject-backend.herokuapp.com/api/v1/login',
+          url: `${url_base}/api/v1/login`,
           data: {
               email:this.state.email,
               password: this.state.password,

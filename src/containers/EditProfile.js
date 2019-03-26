@@ -10,6 +10,8 @@ import {Form,
 // API
 import axios from 'axios'
 
+const url_base=process.env.REACT_APP_URL
+
 const gridBody={
     paddingTop:'48px',
     height:'100vh'
@@ -40,7 +42,7 @@ class EditProfile extends Component {
   
         axios({
             method: 'POST',
-            url: 'https://finalproject-backend.herokuapp.com/api/v1/users/edit',
+            url: `${url_base}/api/v1/users/edit`,
             
             
             data: {
@@ -74,7 +76,7 @@ class EditProfile extends Component {
 
         axios({
             method: 'POST',
-            url: 'https://finalproject-backend.herokuapp.com/api/v1/users/me/delete',
+            url: `${url_base}/api/v1/users/me/delete`,
             
             headers :{
                 Authorization: `Bearer ${jwt}`

@@ -7,6 +7,8 @@ import { Button,
 // Add on
 import axios from 'axios'
 
+const url_base=process.env.REACT_APP_URL
+
 class SignUp extends Component {
 
   state = {
@@ -24,7 +26,7 @@ class SignUp extends Component {
 
       axios({
           method: 'POST',
-          url: 'https://finalproject-backend.herokuapp.com/api/v1/users/',
+          url: `${url_base}/api/v1/users/`,
           data: {
               username:this.state.username,
               email:this.state.email,
