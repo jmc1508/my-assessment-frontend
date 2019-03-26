@@ -30,7 +30,7 @@ class Login extends Component {
 
       axios({
           method: 'POST',
-          url: 'http://127.0.0.1:5000/api/v1/login',
+          url: 'https://finalproject-backend.herokuapp.com/api/v1/login',
           data: {
               email:this.state.email,
               password: this.state.password,
@@ -43,12 +43,14 @@ class Login extends Component {
           localStorage.setItem('myData',JSON.stringify(response.data))
           localStorage.setItem('jwt', response.data.auth_token)
           this.props.history.push("/users/me")
-          this.setState({success:response.data.message,hasErrors:''})
+          this.setState({success:response.data.message,
+                          hasErrors:''})
       })
 
       .catch(error=>{
           console.log('ERROR: ', error)
-          this.setState({hasErrors:!this.state.hasErrors,errors:error.response.data.message})
+          this.setState({hasErrors:!this.state.hasErrors,
+                        errors:error.response.data.message})
 
       })
   

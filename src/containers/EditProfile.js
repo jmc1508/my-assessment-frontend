@@ -37,11 +37,10 @@ class EditProfile extends Component {
     handleSubmit = event => {
         const jwt= localStorage.getItem('jwt')
         event.preventDefault()
-
   
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/v1/users/edit',
+            url: 'https://finalproject-backend.herokuapp.com/api/v1/users/edit',
             
             
             data: {
@@ -75,7 +74,7 @@ class EditProfile extends Component {
 
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/v1/users/me/delete',
+            url: 'https://finalproject-backend.herokuapp.com/api/v1/users/me/delete',
             
             headers :{
                 Authorization: `Bearer ${jwt}`
@@ -102,7 +101,7 @@ class EditProfile extends Component {
 
     render() {
         // Props
-        const {email,username,password,handleDismissPassAlert, success,update_success, delete_success, update_hasErrors,errors,handleSubmitStates, handleSubmitErrors, handleDismissFailAlert, handleDeleteStates, handleDismissDeleteAlert}=this.props
+        const {email,username,password,profile_photo_url,handleDismissPassAlert, success,update_success, delete_success, update_hasErrors,errors,handleSubmitStates, handleSubmitErrors, handleDismissFailAlert, handleDeleteStates, handleDismissDeleteAlert}=this.props
         // States
         const {editEmail,editUsername,}= this.state
 

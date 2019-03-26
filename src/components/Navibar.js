@@ -3,11 +3,10 @@ import {Menu,
         Button,
         Icon,
         Message} from 'semantic-ui-react'
+import {Link,withRouter} from 'react-router-dom'
 // Components
 import Modal from '../components/Modal'
-import SignUp from '../containers/SignUp'
 
-import {Link,withRouter} from 'react-router-dom'
 
 // Style - fix menu item margin issue
 const menuItem={

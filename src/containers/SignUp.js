@@ -24,7 +24,7 @@ class SignUp extends Component {
 
       axios({
           method: 'POST',
-          url: 'http://127.0.0.1:5000/api/v1/users/',
+          url: 'https://finalproject-backend.herokuapp.com/api/v1/users/',
           data: {
               username:this.state.username,
               email:this.state.email,

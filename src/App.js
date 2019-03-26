@@ -33,8 +33,6 @@ class App extends Component {
           <Route path="/users/me" component={props=> <MyProfilePage {...props}/>}/>
           <Route path="/sectors" component={props=> <SectorPerformance isLoading={isLoading} isLoadingSpinner={this.isLoadingSpinner} {...props}/>}/>
           <Route path="/news" component={props=> <NewsAPI {...props}/>}/>
-
-          {/* <Route path="/users/me" component={props=> <MyProfilePage {...props}/>}/> */}
         </Switch>
 
       </div>

@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
 
+// Containers
 import EditProfile from '../containers/EditProfile'
+// Components
 import Error401 from '../components/Error401'
 
 class MyProfilePage extends Component {
@@ -67,7 +69,7 @@ class MyProfilePage extends Component {
       axios({
           
         method: 'GET',
-        url: 'http://127.0.0.1:5000/api/v1/users/me',
+        url: 'https://finalproject-backend.herokuapp.com/api/v1/users/me',
 
         headers :{
             Authorization: `Bearer ${jwt}`
@@ -77,7 +79,8 @@ class MyProfilePage extends Component {
           console.log(response)
 
           this.setState({email:response.data.email,
-                        username:response.data.username})
+                        username:response.data.username,
+                        })
       })
 
       .catch(error=>{
