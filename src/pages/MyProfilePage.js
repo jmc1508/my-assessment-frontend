@@ -59,13 +59,11 @@ class MyProfilePage extends Component {
                       })
     }
 
-    // redirect_home:!this.state.redirect_home
-
-    // Make API request
     componentDidMount = () => {
 
       const jwt= localStorage.getItem('jwt')
-
+      
+      // Fetch: axios
       axios({
           
         method: 'GET',
@@ -80,7 +78,6 @@ class MyProfilePage extends Component {
 
           this.setState({email:response.data.email,
                         username:response.data.username})
-
       })
 
       .catch(error=>{

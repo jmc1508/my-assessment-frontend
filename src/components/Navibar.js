@@ -119,14 +119,14 @@ class Navibar extends Component {
                 
                 {/* Companies - API */}
                     <Menu.Item >
-                        <Icon name='chart line' size='large'/>
+                        <Icon name='newspaper' size='large'/>
                         <Link to="/news">News API</Link>
                     </Menu.Item>
                 
                 {/* Sectors - API */}
                 <Menu.Item position ='left'>
                         <Icon name='chart line' size='large'/>
-                        <Link to="/sectors">Sectors</Link>
+                        <Link to="/sectors">Sector Performance API</Link>
                     </Menu.Item>
 
                 {/* Signup */}
