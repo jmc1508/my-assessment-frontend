@@ -7,6 +7,8 @@ import EditProfile from '../containers/EditProfile'
 // Components
 import Error401 from '../components/Error401'
 
+const url_base=process.env.REACT_APP_URL
+
 class MyProfilePage extends Component {
 
     state={
@@ -69,7 +71,7 @@ class MyProfilePage extends Component {
       axios({
           
         method: 'GET',
-        url: 'https://finalproject-backend.herokuapp.com/api/v1/users/me',
+        url: `${url_base}/api/v1/users/me`,
 
         headers :{
             Authorization: `Bearer ${jwt}`

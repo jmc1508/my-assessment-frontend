@@ -45,7 +45,6 @@ class SignUp extends Component {
 
       .catch(error=>{
           console.log('ERROR: ', error)
-          // this.props.toggleSignupFailed()
           this.setState({errors:error.response.data.message, 
                         success:false, 
                         hasErrors:!this.state.hasErrors})

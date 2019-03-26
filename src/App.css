@@ -4,7 +4,7 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+  height: 500px;
   pointer-events: none;
 }
 
@@ -30,5 +30,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Own style */
+.gridHeight{
+  height:100vh;
 }
 
