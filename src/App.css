@@ -37,3 +37,8 @@
   height:100vh;
 }
 
+.passwordMessage {
+  margin-top:0px;
+  color: red;
+  font-size: 8pt
+}

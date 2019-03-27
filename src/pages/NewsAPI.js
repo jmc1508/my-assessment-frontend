@@ -6,6 +6,7 @@ import { Image,
         Grid,
         List,
         Divider} from 'semantic-ui-react';
+        
 // Style
 import '../App.css'
 import logo from '../logo.svg'

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+// Pages, components and containers
 import JumbotronFluid from '../components/JumbotronFluid'
 
 class HomePage extends Component {
@@ -12,8 +13,6 @@ class HomePage extends Component {
       <div>
         {/* Component - Jumbotron */}
         <JumbotronFluid/>
-        
-        
       </div>
     )
   }

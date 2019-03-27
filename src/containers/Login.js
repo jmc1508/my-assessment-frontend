@@ -70,7 +70,7 @@ class Login extends Component {
 
 
   render() {
-    const{show, toggle, showSignUp, showSignUpModal,showModal}= this.props
+    const{show, toggle, showSignUp, showSignUpModal,showModal,validateEmail}= this.props
     const{email,password,success,hasErrors}=this.state
     return (
       <div>
@@ -101,12 +101,12 @@ class Login extends Component {
           {/* Body */}
           <Modal.Content>
             <Form onSubmit={this.handleSubmit}>
-                <Form.Input name='email' label='Email' icon='user' placeholder='johnsmith@gmail.com' onChange={this.handleInput}></Form.Input>
+                <Form.Input name='email' label='Email' icon='mail' placeholder='johnsmith@gmail.com' onChange={this.handleInput}></Form.Input>
                 <Form.Input name='password' type='password' icon='lock' label='Password' onChange={this.handleInput}></Form.Input>
           
           {/* Disable: If error validation=True */}
                 <Form.Field>
-                  <Button color='teal' disabled={email && password && this.validateEmail(email) ? false: true} type='submit'>Login</Button>
+                  <Button color='teal' disabled={email && password && validateEmail(email) ? false: true} type='submit'>Login</Button>
                 </Form.Field>
           {/* Toggle SignUp Page */}
                 <Form.Field>

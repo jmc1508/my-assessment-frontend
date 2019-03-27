@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
 
-// Containers
+// // Pages, components and containers
 import EditProfile from '../containers/EditProfile'
-// Components
 import Error401 from '../components/Error401'
 
 const url_base=process.env.REACT_APP_URL
@@ -63,6 +62,21 @@ class MyProfilePage extends Component {
                       })
     }
 
+       // Email validation
+       validateEmail=(email)=> {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    // Password validation
+    validatePassword=(password)=>{
+        if (password.length>=8 || password.length==0){
+          return false
+        } else {
+          return true
+        }
+    }
+
     componentDidMount = () => {
 
       const jwt= localStorage.getItem('jwt')
@@ -103,7 +117,7 @@ class MyProfilePage extends Component {
         <div>
             {/* If logged in, allow user to fill up profile page */}
             {jwt?
-            <EditProfile email={email} username={username} password={password} update_hasErrors={update_hasErrors} errors={errors} success={success} update_success={update_success} delete_success={delete_success}  handleDeleteStates={this.handleDeleteStates} dismissAlert={dismissAlert} handleDismissPassAlert={this.handleDismissPassAlert} handleSubmitStates={this.handleSubmitStates} handleSubmitErrors={this.handleSubmitErrors} handleDismissFailAlert={this.handleDismissFailAlert} handleDismissDeleteAlert={this.handleDismissDeleteAlert}/>
+            <EditProfile email={email} username={username} password={password} update_hasErrors={update_hasErrors} errors={errors} success={success} update_success={update_success} delete_success={delete_success}  handleDeleteStates={this.handleDeleteStates} dismissAlert={dismissAlert} handleDismissPassAlert={this.handleDismissPassAlert} handleSubmitStates={this.handleSubmitStates} handleSubmitErrors={this.handleSubmitErrors} handleDismissFailAlert={this.handleDismissFailAlert} handleDismissDeleteAlert={this.handleDismissDeleteAlert} validateEmail={this.validateEmail} validatePassword={this.validatePassword}/>
             :
             <Error401/>}
             {/* If logged out, redirect user to home */}

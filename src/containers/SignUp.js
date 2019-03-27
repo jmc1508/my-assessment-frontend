@@ -4,7 +4,7 @@ import { Button,
         Form,
         Modal,
         Message} from 'semantic-ui-react'
-
+import '../App.css'
 // Add on
 import axios from 'axios'
 
@@ -61,21 +61,16 @@ class SignUp extends Component {
     
   }
 
-  // Email validation
-
-  validateEmail=(email)=> {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  }
+  
 
   render() {
 
     const{username,email,password, success, hasErrors, errors}= this.state;
-    const{show,showModal, showSignUp,toggle,toggleSignupAlert,toggleSignupFailed}=this.props;
+    const{show,showModal, showSignUp,toggle,toggleSignupAlert,toggleSignupFailed, validateEmail, validatePassword}=this.props;
 
     return (
       <div>
-        <Modal open={show} onClose={toggle} size='small' closeIcon>
+        <Modal open={show} onClose={toggle} size='tiny' closeIcon>
             {/* Header */}
             <Modal.Header>
                 Sign Up
@@ -103,12 +98,12 @@ class SignUp extends Component {
             {/* Body */}
             <Modal.Content>
               <Form onSubmit={this.handleSubmit}>
-                  <Form.Input name='username' label='Username' placeholder='Enter username' onChange={this.handleInput}/>
-                  <Form.Input name='email' label='Email' placeholder='johnsmith@gmail.com' onChange={this.handleInput}></Form.Input>
-                  <Form.Input name='password' type='password' label='Password' onChange={this.handleInput}></Form.Input>
-                  
+                  <Form.Input name='username' icon="user" label='Username' placeholder='Enter username' onChange={this.handleInput}/>
+                  <Form.Input name='email' label='Email' icon="mail" placeholder='johnsmith@gmail.com' onChange={this.handleInput}></Form.Input>
+                    <Form.Input name='password' icon ="lock" type='password' label='Password' onChange={this.handleInput}></Form.Input>
+                    <p className="passwordMessage">Your password must be at least 8 characters long.</p>                  
                   <Form.Field>
-                    <Button color='teal' disabled={email && password && username && this.validateEmail(email) ? false: true} type='submit'>Sign Up</Button>
+                    <Button color='teal' disabled={email && password && username && validateEmail(email) && validatePassword(password) ? false: true} type='submit'>Sign Up</Button>
                   </Form.Field>
               </Form>
             </Modal.Content>

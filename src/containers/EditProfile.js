@@ -7,6 +7,7 @@ import {Form,
         Divider,
         Image,
         Message} from 'semantic-ui-react'
+import '../App.css'
 // API
 import axios from 'axios'
 
@@ -132,9 +133,9 @@ class EditProfile extends Component {
 
     render() {
         // Props
-        const {email,username,handleDismissPassAlert, success,update_success, delete_success, update_hasErrors,errors,handleSubmitStates, handleSubmitErrors, handleDismissFailAlert, handleDeleteStates, handleDismissDeleteAlert}=this.props
+        const {email,username,handleDismissPassAlert, success,update_success, delete_success, update_hasErrors,errors,handleSubmitStates, handleSubmitErrors, handleDismissFailAlert, handleDeleteStates, handleDismissDeleteAlert, validateEmail,validatePassword}=this.props
         // States
-        const {editEmail,editUsername}= this.state
+        const {editEmail,editUsername, editPassword}= this.state
 
         return (
             <div>
@@ -194,9 +195,9 @@ class EditProfile extends Component {
                                 <Form.Input name='editEmail' label={`Current e-mail`} type='email' onChange={this.handleInput} defaultValue={editEmail}/>
                             {/* Password */}
                                 <Form.Input name='editPassword' label='Password' type='password' onChange={this.handleInput}/>
+                                <p className="passwordMessage">If updating, your password must be at least 8 characters long.</p>                  
                             {/* Button */}
-
-                                <Button color='teal' >Submit</Button>
+                                <Button color='teal' disabled={validateEmail(editEmail) && validatePassword(editPassword)} >Submit</Button>
                             </Form>
                         </Container>
                         <br/>

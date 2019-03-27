@@ -9,10 +9,6 @@ import Modal from '../components/Modal'
 
 
 // Style - fix menu item margin issue
-const menuItem={
-    marginLeft:'0',
-}
-
 const messageStyle={
     marginTop:'47px',
     marginBottom:'0'

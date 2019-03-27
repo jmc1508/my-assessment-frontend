@@ -5,7 +5,7 @@ import {Grid,
         Divider,
         List} from 'semantic-ui-react'
 
-// Container
+// Pages, components and containers
 import SectorPerformance1Day from '../containers/SectorPerformance1Day'
 import SectorPerformanceYtd from '../containers/SectorPerformanceYtd';
 
