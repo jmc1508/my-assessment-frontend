@@ -66,7 +66,7 @@ class MyProfilePage extends Component {
     componentDidMount = () => {
 
       const jwt= localStorage.getItem('jwt')
-      
+
       // Fetch: axios
       axios({
           
@@ -87,16 +87,18 @@ class MyProfilePage extends Component {
 
       .catch(error=>{
           console.log('ERROR: ', error)
-          this.setState({errors:error.response.data.error,
-                        update_hasErrors:!this.state.update_hasErrors})
+          this.setState({errors:error.response.data.error,})
+                        // update_hasErrors:!this.state.update_hasErrors})
         })
 
     }
     // Render
     render() {
+      // Validation: User must be logged in
       const jwt=localStorage.getItem('jwt')
+      // States
       const {email,username,password,dismissAlert, update_hasErrors,errors, success, update_success, delete_success, redirect_home}=this.state
-
+ 
       return (
         <div>
             {/* If logged in, allow user to fill up profile page */}

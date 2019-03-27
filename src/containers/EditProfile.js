@@ -35,6 +35,35 @@ class EditProfile extends Component {
         this.setState({[event.target.name]:event.target.value})
       }
     
+    // Axios - update states with current user's data
+
+    componentDidMount=()=>{
+        const jwt= localStorage.getItem('jwt')
+
+        axios({
+            method: 'GET',
+            url: `${url_base}/api/v1/users/me`,
+            
+            headers :{
+                Authorization: `Bearer ${jwt}`
+            },
+
+        })
+        .then(response => {
+            console.log(response)
+            const user=response.data
+            this.setState({editEmail:user.email,
+                            editUsername:user.username})
+        })
+  
+        .catch(error=>{
+            console.log('ERROR: ', error)
+            var error_msg=error.response.data.message
+            this.props.handleSubmitErrors(error_msg)            
+        })
+
+    }
+
     // Axios - submit edit data to backend
     handleSubmit = event => {
         const jwt= localStorage.getItem('jwt')
@@ -103,9 +132,9 @@ class EditProfile extends Component {
 
     render() {
         // Props
-        const {email,username,password,profile_photo_url,handleDismissPassAlert, success,update_success, delete_success, update_hasErrors,errors,handleSubmitStates, handleSubmitErrors, handleDismissFailAlert, handleDeleteStates, handleDismissDeleteAlert}=this.props
+        const {email,username,handleDismissPassAlert, success,update_success, delete_success, update_hasErrors,errors,handleSubmitStates, handleSubmitErrors, handleDismissFailAlert, handleDeleteStates, handleDismissDeleteAlert}=this.props
         // States
-        const {editEmail,editUsername,}= this.state
+        const {editEmail,editUsername}= this.state
 
         return (
             <div>
@@ -160,9 +189,9 @@ class EditProfile extends Component {
                         <Container textAlign='left'>
                             <Form size='large'onSubmit={this.handleSubmit}>
                             {/* Username */}
-                                <Form.Input name='editUsername' label='Username' type='username' onChange={this.handleInput}  defaultValue={username}/>
+                                <Form.Input name='editUsername' label={`Current username`} type='username' onChange={this.handleInput} defaultValue={editUsername} />
                             {/* Email */}
-                                <Form.Input name='editEmail' label='E-mail' type='email' onChange={this.handleInput}  defaultValue={email}/>
+                                <Form.Input name='editEmail' label={`Current e-mail`} type='email' onChange={this.handleInput} defaultValue={editEmail}/>
                             {/* Password */}
                                 <Form.Input name='editPassword' label='Password' type='password' onChange={this.handleInput}/>
                             {/* Button */}

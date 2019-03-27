@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {withRouter} from 'react-router-dom'
 import { Button, 
         Form,
         Modal,
@@ -38,6 +39,7 @@ class SignUp extends Component {
           localStorage.setItem('myData',JSON.stringify(response.data))
           localStorage.setItem('jwt', response.data.auth_token)
           setTimeout(this.props.toggle,1000)
+          this.props.history.push("/")
           this.setState({hasErrors:false, 
                           success:response.data.message,
                          })          
@@ -116,4 +118,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp
+export default withRouter(SignUp)

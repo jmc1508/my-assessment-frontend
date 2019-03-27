@@ -16,6 +16,7 @@ class Login extends Component {
     state = {
           email:'',
           password:'',
+          username:'',
           success:'',
           errors:[],
           hasErrors:'',
@@ -45,7 +46,10 @@ class Login extends Component {
           localStorage.setItem('myData',JSON.stringify(response.data))
           localStorage.setItem('jwt', response.data.auth_token)
           this.props.history.push("/users/me")
+          debugger
           this.setState({success:response.data.message,
+                          email:response.data.user.email,
+                          username:response.data.user.username,
                           hasErrors:''})
       })
 

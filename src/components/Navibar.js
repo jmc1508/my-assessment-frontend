@@ -69,9 +69,8 @@ class Navibar extends Component {
     }
     // Render
     render() {
-        
         const {show,signupIsToggled,logoutIsToggled, signupFailed, showSignUp}= this.state
-
+        
         return (
             <div>
                 {/* Alert Message: Signup Toggled */}
