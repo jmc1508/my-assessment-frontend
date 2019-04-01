@@ -4,8 +4,6 @@ import { Button,
         Form,
         Modal,
         Message} from 'semantic-ui-react'
-
-
 // Add on
 import axios from 'axios'
 
@@ -68,7 +66,6 @@ class Login extends Component {
       return re.test(String(email).toLowerCase());
     }
 
-
   render() {
     const{show, toggle, showSignUp, showSignUpModal,showModal,validateEmail}= this.props
     const{email,password,success,hasErrors}=this.state
@@ -102,8 +99,7 @@ class Login extends Component {
           <Modal.Content>
             <Form onSubmit={this.handleSubmit}>
                 <Form.Input name='email' label='Email' icon='mail' placeholder='johnsmith@gmail.com' onChange={this.handleInput}></Form.Input>
-                <Form.Input name='password' type='password' icon='lock' label='Password' onChange={this.handleInput}></Form.Input>
-          
+                <Form.Input name='password' type='password' icon='lock' label='Password' onChange={this.handleInput}></Form.Input>         
           {/* Disable: If error validation=True */}
                 <Form.Field>
                   <Button color='teal' disabled={email && password && validateEmail(email) ? false: true} type='submit'>Login</Button>

@@ -99,7 +99,7 @@ class Navibar extends Component {
                 {show? <Modal show={show} showModal={this.showModal} showSignUp={showSignUp} toggle={this.toggle} toggleSignupAlert={this.toggleSignupAlert} toggleSignupFailed={this.toggleSignupFailed} showSignUpModal={this.showSignUpModal}/>:null}
 
                 {/* Menu Items */}
-                <Menu fixed='top'>
+                <Menu fixed='top' stackable>
                     <Menu.Item>
                         <Icon name='home' size='large' />
                         <Link to="/">Homepage</Link>

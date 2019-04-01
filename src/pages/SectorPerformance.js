@@ -86,7 +86,7 @@ class SectorPerformance extends PureComponent {
         
         :
             <Grid>
-
+                
                 <Grid.Row>
                         <Grid.Column width={3}></Grid.Column>
                         <Grid.Column width={10} textAlign='left'>
